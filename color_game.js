@@ -10,7 +10,7 @@ let colors = [
 ] 
 
 let squares = document.querySelectorAll(".square");
-let picked_color = colors[3]; 
+let picked_color = pick_color() ; 
 let color_display = document.getElementById("color_display");
 let message_display = document.querySelector("#message"); 
 
@@ -42,3 +42,14 @@ function change_colors (color) {
   }  
 } 
 
+function pick_color(){
+  //pick a random number 
+  // use the number to access the color out of the array and return the color 
+  /* we are trying to randomly pick a color and attach it to one index 
+  of the arrary. even though the length of the array is 1 more than the highest index
+  so the length is 6 but highest number we want is 5, but math.floor * math.random 
+  assures we only choose indexes between 0 and 5 so we are good */
+
+  let random = Math.floor(Math.random() * colors.length); 
+  return colors[random]; 
+}
