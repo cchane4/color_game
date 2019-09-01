@@ -1,17 +1,48 @@
 
 
-let colors = generate_random_colors (6); 
-
+let num_squares = 6; 
+let colors = generate_random_colors (num_squares); 
 let squares = document.querySelectorAll(".square");
 let picked_color = pick_color() ; 
 let color_display = document.getElementById("color_display");
 let message_display = document.querySelector("#message"); 
 let h1 = document.querySelector("h1"); 
 let reset_button = document.querySelector("#reset"); 
+let easy_button = document.querySelector("#easy_btn"); 
+let hard_button = document.querySelector("#hard_btn"); 
+
+easy_button.addEventListener("click", function(){  
+  easy_button.classList.add("selected"); 
+  hard_button.classList.remove("selected");
+  num_squares = 3;  
+  colors = generate_random_colors(num_squares); 
+  picked_color = pick_color(); 
+  color_display.textContent = picked_color; 
+  for (let i = 0; i < squares.length; i++){ 
+    if (colors[i]){ 
+      squares[i].style.backgroundColor = colors[i]; 
+    } else { 
+      squares[i].style.display = "none"; 
+    }
+  }
+}); 
+
+hard_button.addEventListener("click", function(){ 
+  hard_button.classList.add("selected"); 
+  easy_button.classList.remove("selected");
+  num_squares = 6;  
+  colors = generate_random_colors(num_squares); 
+  picked_color = pick_color(); 
+  color_display.textContent = picked_color; 
+  for (let i = 0; i < squares.length; i++){ 
+      squares[i].style.backgroundColor = colors[i]; 
+      squares[i].style.display = "block"; 
+  }  
+}); 
 
 reset_button.addEventListener("click", function(){
   // generate all new colors 
-   colors = generate_random_colors (6); 
+   colors = generate_random_colors(num_squares); 
   //pick a new random color from array 
    picked_color = pick_color() ; 
   // change color display to match picked color 
