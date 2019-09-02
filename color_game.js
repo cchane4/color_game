@@ -7,52 +7,73 @@ let color_display = document.getElementById("color_display");
 let message_display = document.querySelector("#message"); 
 let h1 = document.querySelector("h1"); 
 let reset_button = document.querySelector("#reset"); 
-let easy_button = document.querySelector("#easy_btn"); 
-let hard_button = document.querySelector("#hard_btn"); 
+let mode_buttons = document.querySelectorAll(".mode"); 
 
-easy_button.addEventListener("click", function(){  
-  easy_button.classList.add("selected"); 
-  hard_button.classList.remove("selected");
-  num_squares = 3;  
+
+for(let i = 0; i < mode_buttons.length; i++){ 
+  mode_buttons[i].addEventListener("click", function (){ 
+     mode_buttons[0].classList.remove("selected"); 
+     mode_buttons[1].classList.remove("selected"); 
+    this.classList.add("selected");
+    this.textContent === "Easy" ? num_squares = 3 :num_squares = 6;
+    reset();  
+  }); 
+}
+
+ function reset(){
   colors = generate_random_colors(num_squares); 
-  picked_color = pick_color(); 
-  color_display.textContent = picked_color; 
-  for (let i = 0; i < squares.length; i++){ 
-    if (colors[i]){ 
-      squares[i].style.backgroundColor = colors[i]; 
-    } else { 
-      squares[i].style.display = "none"; 
-    }
-  }
-}); 
-
-hard_button.addEventListener("click", function(){ 
-  hard_button.classList.add("selected"); 
-  easy_button.classList.remove("selected");
-  num_squares = 6;  
-  colors = generate_random_colors(num_squares); 
-  picked_color = pick_color(); 
-  color_display.textContent = picked_color; 
-  for (let i = 0; i < squares.length; i++){ 
-      squares[i].style.backgroundColor = colors[i]; 
-      squares[i].style.display = "block"; 
-  }  
-}); 
-
-reset_button.addEventListener("click", function(){
-  // generate all new colors 
-   colors = generate_random_colors(num_squares); 
   //pick a new random color from array 
    picked_color = pick_color() ; 
   // change color display to match picked color 
-  color_display.textContent = picked_color; 
+  color_display.textContent = picked_color;
+  reset_button.textContent = "New Colors" 
+    message_display.textContent = ""; 
   //change colors of squares on the page 
-  for (let i = 0; i < squares.length; i++){ 
+  for (let i = 0; i < squares.length; i++){
+    if (colors[i]){
+    squares[i].style.display = "block";   
     squares[i].style.backgroundColor = colors[i];
-    h1.style.backgroundColor = "steelblue";
-    message_display.textContent = "";   
+     } else { 
+      squares[i].style.display = "none";  
+     }
   }
+    h1.style.backgroundColor = "steelblue"; 
+  
+ } 
+
+// easy_button.addEventListener("click", function(){  
+//   easy_button.classList.add("selected"); 
+//   hard_button.classList.remove("selected");
+//   num_squares = 3;  
+//   colors = generate_random_colors(num_squares); 
+//   picked_color = pick_color(); 
+//   color_display.textContent = picked_color; 
+//   for (let i = 0; i < squares.length; i++){ 
+//     if (colors[i]){ 
+//       squares[i].style.backgroundColor = colors[i]; 
+//     } else { 
+//       squares[i].style.display = "none"; 
+//     }
+//   }
+// }); 
+
+// hard_button.addEventListener("click", function(){ 
+//   hard_button.classList.add("selected"); 
+//   easy_button.classList.remove("selected");
+//   num_squares = 6;  
+//   colors = generate_random_colors(num_squares); 
+//   picked_color = pick_color(); 
+//   color_display.textContent = picked_color; 
+//   for (let i = 0; i < squares.length; i++){ 
+//       squares[i].style.backgroundColor = colors[i]; 
+//       squares[i].style.display = "block"; 
+//   }  
+// }); 
+
+reset_button.addEventListener("click", function(){
+reset (); 
 }); 
+
 
 color_display.textContent = picked_color; 
 
@@ -97,10 +118,10 @@ function pick_color(){
 
 function generate_random_colors (num){ 
 let arr = []; 
-for (let i = 0; i < num; i++){ 
-  arr.push(random_color()); 
-}
-return arr; 
+  for (let i = 0; i < num; i++){ 
+    arr.push(random_color()); 
+  }
+  return arr; 
 }
 
 function random_color (){ 
@@ -108,4 +129,5 @@ let r = Math.floor(Math.random() * 256);
 let g = Math.floor(Math.random() * 256);  
 let b  = Math.floor(Math.random() * 256); 
 return "rgb(" + r + ", " + g + ", " + b + ")";
-}
+
+ } 
