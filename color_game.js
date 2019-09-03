@@ -19,7 +19,7 @@ function init() {
 
 
 
-function set_up_mode_buttons () { 
+function set_up_mode_buttons() { 
   for(let i = 0; i < mode_buttons.length; i++){ 
     mode_buttons[i].addEventListener("click", function (){ 
     mode_buttons[0].classList.remove("selected"); 
@@ -33,7 +33,7 @@ function set_up_mode_buttons () {
 }
 
 
-function set_up_squares (){ 
+function set_up_squares() { 
   // this code sets up the square event listeners 
   for (let i = 0; i < squares.length; i++){  
     squares[i].addEventListener("click", function(){ 
@@ -52,7 +52,7 @@ function set_up_squares (){
   }
 }
 
- function reset () {
+ function reset() {
   colors = generate_random_colors(num_squares); 
   //pick a new random color from array 
    picked_color = pick_color() ; 
@@ -92,7 +92,7 @@ let change_colors = (color) =>  {
   of the arrary. even though the length of the array is 1 more than the highest index
   so the length is 6 but highest number we want is 5, but math.floor * math.random 
   assures we only choose indexes between 0 and 5 so we are good */
-function pick_color() {
+ function pick_color() {
   let random = Math.floor(Math.random() * colors.length); 
   return colors[random]; 
 }
